@@ -4,7 +4,7 @@ let startBtn = document.querySelector("#startBtn");
 
 let stopBtn = document.querySelector("#stopBtn");
 
-let hexShow = document.querySelector('#hex_here');
+let hexShow = document.querySelector("#hex_here");
 
 let timeStartInt;
 
@@ -20,20 +20,20 @@ function hexColorGenerator() {
 
 // Show Cases
 startBtn.addEventListener("click", function (e) {
-   timeStartInt = setInterval(
-    () => {
-      const recievedColor = hexColorGenerator();
-      showColor.style.backgroundColor = recievedColor;
-      hexShow.innerHTML= `${recievedColor}`
-      console.log('Hex color generator is start')
-    },
-    1000,
-    ""
-  );
+  if (!timeStartInt) {
+    timeStartInt = setInterval(
+      () => {
+        const recievedColor = hexColorGenerator();
+        showColor.style.backgroundColor = recievedColor;
+        hexShow.innerHTML = `${recievedColor}`;
+      },
+      1000,
+      ""
+    );
+  }
 });
 
-
-stopBtn.addEventListener('click', function(){
-    console.log('Hex color generator is stoped')
-    clearInterval(timeStartInt);
-})
+stopBtn.addEventListener("click", function () {
+  clearInterval(timeStartInt);
+  timeStartInt = null;
+});
